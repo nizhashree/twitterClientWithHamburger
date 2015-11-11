@@ -8,8 +8,11 @@
 
 #import "TweetDetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
-
+#import "ComposeTweetViewController.h"
+#import "TwitterClient.h"
 @interface TweetDetailsViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *retweetedText;
+@property (weak, nonatomic) IBOutlet UIButton *retweetedButton;
 @property (weak, nonatomic) IBOutlet UIImageView *UserProfilePic;
 @property (weak, nonatomic) IBOutlet UILabel *ScreenName;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
@@ -17,20 +20,47 @@
 @property (weak, nonatomic) IBOutlet UILabel *CreatedDate;
 @property (weak, nonatomic) IBOutlet UILabel *RetweetCount;
 @property (weak, nonatomic) IBOutlet UILabel *FavouriteCount;
+@property (weak, nonatomic) IBOutlet UIButton *ReplyButton;
+@property (weak, nonatomic) IBOutlet UIButton *RetweetButton;
+@property (weak, nonatomic) IBOutlet UIButton *FavButton;
 
 @end
 
 @implementation TweetDetailsViewController
+- (IBAction)onReply:(id)sender {
+    _ReplyButton.userInteractionEnabled = NO;
+    ComposeTweetViewController *vc = [[ComposeTweetViewController alloc] init];
+    [vc setReplyTweet:_singleTweet];
+    vc.delegate = self;
+    vc.edgesForExtendedLayout = UIRectEdgeNone;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (IBAction)onRetweet:(id)sender {
+    _RetweetButton.userInteractionEnabled = NO;
+    [[TwitterClient sharedInstance] reTweetWithCompletion:_singleTweet.tweetID :^(tweet *tweetObj, NSError *error) {
+        if(error == nil){
+            //success
+            self.RetweetCount.text = [NSString stringWithFormat:@"%d", tweetObj.retweet_count];
+        }else {
+            //error
+        }
+    }];
+}
+- (IBAction)onLiking:(id)sender {
+    _FavButton.userInteractionEnabled = NO;
+    [[TwitterClient sharedInstance] favouriteWithCompletion:_singleTweet.tweetID :^(tweet *tweetObj, NSError *error) {
+        if(error == nil){
+            //success
+            self.FavouriteCount.text = [NSString stringWithFormat:@"%d", tweetObj.favourite_count];
+        }else {
+            //error
+        }
+
+    } ];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-//    self.singleTweet = singleTweet;
-//    self.tweetDescription.text = singleTweet.text;
-//    self.UserID.text = [NSString stringWithFormat:@"@%@", singleTweet.user.screenName];
-//    self.UserName.text = singleTweet.user.name;
-//    [self.UserProfileImage setImageWithURL: [NSURL URLWithString: singleTweet.user.profileImageURL]];
-//    [self setCreatedTimeStamp: singleTweet.createdAt];
     self.ScreenName.text = self.singleTweet.user.name;
     self.userName.text = [NSString stringWithFormat:@"@%@", _singleTweet.user.screenName];
     self.tweetDesc.text = _singleTweet.text;
@@ -38,6 +68,14 @@
     self.FavouriteCount.text = [NSString stringWithFormat:@"%d", _singleTweet.favourite_count];
     [self.UserProfilePic setImageWithURL:[NSURL URLWithString:_singleTweet.user.profileImageURL]];
     [self setCreatedTimeStamp: _singleTweet.createdAt];
+    if(self.singleTweet.retweetUser.name != nil){
+        self.retweetedButton.hidden = NO;
+        self.retweetedText.hidden = NO;
+        self.retweetedText.text = [NSString stringWithFormat:@"%@ retweeted", self.singleTweet.retweetUser.name];
+    }else{
+        self.retweetedButton.hidden = YES;
+        self.retweetedText.hidden = YES;
+    }
 }
 
 - (void) setCreatedTimeStamp:(NSDate*) timestamp{
@@ -63,6 +101,12 @@
 
 -(void) setJson:(tweet*)singleTweet{
     self.singleTweet = singleTweet;
+}
+
+-(void) composeTweetViewController:(ComposeTweetViewController *) composeTweetViewController didCreateTweet:(tweet*) singleTweet{
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self.tweets insertObject:singleTweet atIndex:0];
+//    [self.TweetsTableView reloadData];
 }
 
 @end

@@ -13,7 +13,11 @@
 @interface TwitterClient : BDBOAuth1RequestOperationManager
 + (TwitterClient*)sharedInstance;
 
+@property (nonatomic, strong) User* currentUser;
 - (void) loginWithCompletion:(void(^)(User* user, NSError* error)) completion;
 - (void) tweetsWithCompletion:(void(^)(NSArray* tweets, NSError* error)) completion;
+- (void) createTweetWithCompletion:(NSDictionary*) params:(void(^)(tweet* tweetObj, NSError* error)) completion;
+- (void) reTweetWithCompletion:(long long) tweetID:(void(^)(tweet* tweetObj, NSError* error)) completion;
+- (void) favouriteWithCompletion:(long long) tweetID:(void(^)(tweet* tweetObj, NSError* error)) completion;
 - (void) openUrl:(NSURL*) url;
 @end

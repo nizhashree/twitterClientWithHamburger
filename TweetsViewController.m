@@ -8,14 +8,15 @@
 
 #import "TweetsViewController.h"
 #import "TweetDetailsViewController.h"
+#import "ComposeTweetViewController.h"
 #import "TweetTableViewCell.h"
 #import "TwitterClient.h"
 #import "tweet.h"
 #import "MBProgressHUD.h"
 
-@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *TweetsTableView;
-@property NSArray* tweets;
+@property NSMutableArray* tweets;
 
 @end
 
@@ -28,10 +29,12 @@
     self.TweetsTableView.delegate = self;
     self.TweetsTableView.estimatedRowHeight = 86;
     self.TweetsTableView.rowHeight = UITableViewAutomaticDimension;
+    self.TweetsTableView.hidden = YES;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[TwitterClient sharedInstance] tweetsWithCompletion:^(NSArray *tweets, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if(error == nil) {
+            self.TweetsTableView.hidden = NO;
             for(tweet* singleTweet in tweets){
                 NSLog(@"%@ -- %@", singleTweet.createdAt, singleTweet.text);
             }
@@ -43,6 +46,22 @@
         }
     }];
     [self.TweetsTableView registerNib:[UINib nibWithNibName:@"TweetTableViewCell" bundle:nil] forCellReuseIdentifier:@"TweetTableViewCell"];
+    [self setNavigationBar];
+}
+
+-(void) setNavigationBar {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(10, 0, 70, 30);
+    [button setTitle:@"New" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(goToComposeTweetController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+-(void) goToComposeTweetController{
+    ComposeTweetViewController *vc = [[ComposeTweetViewController alloc] init];
+    vc.delegate = self;
+    vc.edgesForExtendedLayout = UIRectEdgeNone;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,5 +101,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+-(void) composeTweetViewController:(ComposeTweetViewController *) composeTweetViewController didCreateTweet:(tweet*) singleTweet{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.tweets insertObject:singleTweet atIndex:0];
+    [self.TweetsTableView reloadData];
+}
 
 @end

@@ -1,0 +1,86 @@
+//
+//  TweetsViewController.m
+//  twitter
+//
+//  Created by Nizha Shree Seenivasan on 11/9/15.
+//  Copyright © 2015 Nizha Shree Seenivasan. All rights reserved.
+//
+
+#import "TweetsViewController.h"
+#import "TweetDetailsViewController.h"
+#import "TweetTableViewCell.h"
+#import "TwitterClient.h"
+#import "tweet.h"
+#import "MBProgressHUD.h"
+
+@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *TweetsTableView;
+@property NSArray* tweets;
+
+@end
+
+@implementation TweetsViewController
+
+- (void)viewDidLoad {
+    self.title = @"Home";
+    [super viewDidLoad];
+    self.TweetsTableView.dataSource = self;
+    self.TweetsTableView.delegate = self;
+    self.TweetsTableView.estimatedRowHeight = 86;
+    self.TweetsTableView.rowHeight = UITableViewAutomaticDimension;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[TwitterClient sharedInstance] tweetsWithCompletion:^(NSArray *tweets, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if(error == nil) {
+            for(tweet* singleTweet in tweets){
+                NSLog(@"%@ -- %@", singleTweet.createdAt, singleTweet.text);
+            }
+            self.tweets = tweets;
+            [self.TweetsTableView reloadData];
+        }
+        else{
+            //handle error case
+        }
+    }];
+    [self.TweetsTableView registerNib:[UINib nibWithNibName:@"TweetTableViewCell" bundle:nil] forCellReuseIdentifier:@"TweetTableViewCell"];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.tweets.count;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (TweetTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    TweetTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"TweetTableViewCell"];
+    [cell setTweet:self.tweets[indexPath.row]];
+    return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.TweetsTableView deselectRowAtIndexPath:indexPath animated:YES];
+    TweetTableViewCell *selectedCell=[tableView cellForRowAtIndexPath:indexPath];
+    TweetDetailsViewController *vc = [[TweetDetailsViewController alloc] init];
+    vc.edgesForExtendedLayout = UIRectEdgeNone;
+    [vc setJson:selectedCell.singleTweet];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+@end

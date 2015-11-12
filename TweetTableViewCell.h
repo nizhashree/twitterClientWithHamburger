@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *tweetDescription;
 @property (weak, nonatomic) IBOutlet UILabel *CreatedDate;
 @property (weak, nonatomic) IBOutlet UIImageView *UserProfileImage;
-@property (weak, nonatomic) IBOutlet UILabel *UserID;
 @property (nonatomic, strong) tweet* singleTweet;
 @property (weak, nonatomic) IBOutlet UILabel *UserName;
 @property (weak, nonatomic) IBOutlet UIImageView *retweetedButton;

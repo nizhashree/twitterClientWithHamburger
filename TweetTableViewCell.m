@@ -24,8 +24,8 @@
 -(void) setTweet:(tweet*) singleTweet{
     self.singleTweet = singleTweet;
     self.tweetDescription.text = singleTweet.text;
-    self.UserID.text = [NSString stringWithFormat:@"@%@", singleTweet.user.screenName];
-    self.UserName.text = singleTweet.user.name;
+//    self.UserID.text = [NSString stringWithFormat:@"@%@", singleTweet.user.screenName];
+    self.UserName.text = [NSString stringWithFormat:@"%@  @%@", singleTweet.user.name, singleTweet.user.screenName];
     [self.UserProfileImage setImageWithURL: [NSURL URLWithString: singleTweet.user.profileImageURL]];
     [self setCreatedTimeStamp: singleTweet.createdAt];
     if(self.singleTweet.retweetUser.name != nil){

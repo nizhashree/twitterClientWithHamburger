@@ -10,6 +10,7 @@
 #import "User.h"
 #import "tweet.h"
 
+extern NSString * const UserDidLogOutNotification;
 @interface TwitterClient : BDBOAuth1RequestOperationManager
 + (TwitterClient*)sharedInstance;
 
@@ -20,4 +21,5 @@
 - (void) reTweetWithCompletion:(long long) tweetID:(void(^)(tweet* tweetObj, NSError* error)) completion;
 - (void) favouriteWithCompletion:(long long) tweetID:(void(^)(tweet* tweetObj, NSError* error)) completion;
 - (void) openUrl:(NSURL*) url;
+- (User*) getCurrentUser;
 @end

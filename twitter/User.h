@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString* screenName;
 @property (nonatomic, strong) NSString* profileImageURL;
 @property (nonatomic, strong) NSString* tagline;
+@property (nonatomic, strong) NSDictionary* dictionary;
 
 - (id) initWithDictionary:(NSDictionary*) dictionary;
 @end

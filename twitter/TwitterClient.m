@@ -12,6 +12,8 @@ NSString * const kConsumerKey = @"sUTC7OG37z54NtiCG5awjAtR0";
 NSString * const kConsumerSecret = @"TnB6KSk5QpT4TulnrmKKpf1bIONwKtxtjOKlOVMExaN8d9ja7A";
 NSString * const kBaseURL = @"https://api.twitter.com";
 
+NSString * const UserDidLogOutNotification = @"UserDidLogOutNotification";
+
 @interface TwitterClient ()
 @property (nonatomic, strong) void(^ loginCompletion)(User* user, NSError* error);
 @property (nonatomic, strong) void(^ tweetsCompletion)(NSArray* tweets, NSError* error);
@@ -64,7 +66,7 @@ NSString * const kBaseURL = @"https://api.twitter.com";
         [self GET:@"1.1/account/verify_credentials.json" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             //            NSLog(@"Current user: %@", responseObject);
             User * currentUser = [[User alloc] initWithDictionary:responseObject];
-            _currentUser = currentUser;
+            [self setCurrentUser:currentUser];
             self.loginCompletion(currentUser, nil);
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
             NSLog(@"%@", error);
@@ -113,5 +115,28 @@ NSString * const kBaseURL = @"https://api.twitter.com";
         NSLog(@"%@", error);
         self.favouriteCompletion(nil, error);
     }];
+}
+
+- (void) setCurrentUser:(User *)currentUser{
+    if(currentUser != nil) {
+        NSData* data =  [NSJSONSerialization dataWithJSONObject:currentUser.dictionary options:0 error:NULL];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"currentUser"];
+        
+    }else{
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentUser"];
+    }
+    _currentUser = currentUser;
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (User*) getCurrentUser {
+    if(_currentUser == nil){
+       NSData* data =  [[NSUserDefaults standardUserDefaults] objectForKey:@"currentUser"];
+        if(data != nil){
+            NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+            _currentUser = [[User alloc] initWithDictionary:dictionary];
+        }
+    }
+    return _currentUser;
 }
 @end

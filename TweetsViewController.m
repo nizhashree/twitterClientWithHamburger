@@ -9,6 +9,7 @@
 #import "TweetsViewController.h"
 #import "TweetDetailsViewController.h"
 #import "ComposeTweetViewController.h"
+#import "SignInViewController.h"
 #import "TweetTableViewCell.h"
 #import "TwitterClient.h"
 #import "tweet.h"
@@ -50,11 +51,29 @@
 }
 
 -(void) setNavigationBar {
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(10, 0, 70, 30);
     [button setTitle:@"New" forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
     [button addTarget:self action:@selector(goToComposeTweetController) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    
+    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button2.frame = CGRectMake(10, 0, 70, 30);
+    [button2 setTitle:@"Sign Out" forState:UIControlStateNormal];
+    [button2 addTarget:self action:@selector(onSignOut) forControlEvents:UIControlEventTouchUpInside];
+    button2.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button2];
+}
+
+-(void) onSignOut{
+    [[TwitterClient sharedInstance] setCurrentUser:nil];
+    [[TwitterClient sharedInstance].requestSerializer removeAccessToken];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogOutNotification object:nil];
+//    SignInViewController *tvc = [[SignInViewController alloc] init];
+//    [self presentViewController:tvc animated:NO completion:nil];
 }
 
 -(void) goToComposeTweetController{

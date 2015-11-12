@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SignInViewController.h"
 #import "TwitterClient.h"
 #import "User.h"
 #import "tweet.h"
@@ -20,7 +21,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(onLogout) name:UserDidLogOutNotification object:nil];
     return YES;
+}
+
+-(void) onLogout{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SignInViewController *rootViewController = [storyboard instantiateInitialViewController];
+    [[UIApplication sharedApplication].keyWindow setRootViewController:rootViewController];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

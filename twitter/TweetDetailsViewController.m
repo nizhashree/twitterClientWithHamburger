@@ -72,9 +72,11 @@
         self.retweetedButton.hidden = NO;
         self.retweetedText.hidden = NO;
         self.retweetedText.text = [NSString stringWithFormat:@"%@ retweeted", self.singleTweet.retweetUser.name];
+        [self.retweetedButton setImage:[UIImage imageNamed:@"Retweet"] forState:UIControlStateNormal];
     }else{
         self.retweetedButton.hidden = YES;
         self.retweetedText.hidden = YES;
+        self.retweetedText.text = @"";
     }
 }
 

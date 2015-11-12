@@ -35,6 +35,7 @@
     }else{
         self.retweetedButton.hidden = YES;
         self.retweetUserName.hidden = YES;
+        self.retweetUserName.text = @"";
     }
 }
 

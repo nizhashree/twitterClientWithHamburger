@@ -114,13 +114,6 @@
                     <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3G-6a-5OA">
-                    <rect key="frame" x="31" y="229" width="29" height="22"/>
-                    <state key="normal" title="Button" image="Reply"/>
-                    <connections>
-                        <action selector="onReply:" destination="-1" eventType="touchUpInside" id="axs-2N-XIt"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ih-v3-Ht2">
                     <rect key="frame" x="106" y="224" width="26" height="22"/>
                     <constraints>
@@ -141,16 +134,23 @@
                         <action selector="onLiking:" destination="-1" eventType="touchUpInside" id="XJa-W7-fNR"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ged-Un-TuF">
-                    <rect key="frame" x="11" y="12" width="20" height="22"/>
-                    <state key="normal" image="Retweet"/>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x retweeted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ois-7P-GLn">
                     <rect key="frame" x="39" y="15" width="77" height="16"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                     <color key="textColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ged-Un-TuF">
+                    <rect key="frame" x="11" y="12" width="20" height="22"/>
+                    <state key="normal" image="Retweet"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3G-6a-5OA">
+                    <rect key="frame" x="31" y="229" width="29" height="22"/>
+                    <state key="normal" title="Button" image="Reply"/>
+                    <connections>
+                        <action selector="onReply:" destination="-1" eventType="touchUpInside" id="axs-2N-XIt"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -180,7 +180,6 @@
                 <constraint firstItem="2cx-Dc-Ic1" firstAttribute="top" secondItem="a92-8k-TkE" secondAttribute="bottom" constant="21" id="Oll-Ur-BBa"/>
                 <constraint firstItem="Ois-7P-GLn" firstAttribute="leading" secondItem="ged-Un-TuF" secondAttribute="trailing" constant="8" id="Pbc-5Z-60j"/>
                 <constraint firstItem="Sdd-1d-9kK" firstAttribute="top" secondItem="a4j-Fs-wv9" secondAttribute="bottom" constant="8" id="S2y-N9-5Xj"/>
-                <constraint firstItem="5Ih-v3-Ht2" firstAttribute="centerY" secondItem="c3G-6a-5OA" secondAttribute="centerY" id="VrT-Zv-fpb"/>
                 <constraint firstItem="BYc-j0-t9v" firstAttribute="leading" secondItem="Dsy-ib-g0N" secondAttribute="trailing" constant="16" id="W4P-Dd-egr"/>
                 <constraint firstItem="a4j-Fs-wv9" firstAttribute="top" secondItem="RXf-Jy-oJc" secondAttribute="bottom" constant="8" id="X7I-SS-bHO"/>
                 <constraint firstItem="hEp-lh-ImH" firstAttribute="top" secondItem="Sdd-1d-9kK" secondAttribute="bottom" constant="8" id="YhQ-Eg-nvZ"/>

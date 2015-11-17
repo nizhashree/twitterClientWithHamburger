@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HamburgerViewController.h"
 
-@interface SignInViewController : UIViewController
+@interface LoginViewController : UIViewController
 
-
+-(void) setHamburger:(HamburgerViewController *)hvc:(UIWindow*) window;
 @end
 

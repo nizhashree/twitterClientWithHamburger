@@ -6,18 +6,22 @@
 //  Copyright © 2015 Nizha Shree Seenivasan. All rights reserved.
 //
 
-#import "SignInViewController.h"
+#import "LoginViewController.h"
 #import "TweetsViewController.h"
+#import "MenuViewController.h"
+#import "HamburgerViewController.h"
 #import "TwitterClient.h"
 
-@interface SignInViewController ()
+@interface LoginViewController ()
 - (IBAction)onLogin:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UILabel *successLogin;
+@property (strong, nonatomic) HamburgerViewController *hvc;
+@property (strong, nonatomic) UIWindow *window;
 
 @end
 
-@implementation SignInViewController
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,7 +30,7 @@
         NSLog(@"%@", currentUser.name);
         self.signInButton.hidden = YES;
         self.successLogin.hidden = NO;
-        [self performSelector:@selector(openTweetsViewController) withObject:nil afterDelay:0.0];
+        [self performSelector:@selector(openHamburgerViewController) withObject:nil afterDelay:0.0];
     }
 }
 
@@ -35,16 +39,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) setHamburger:(HamburgerViewController *)hvc:(UIWindow*) window{
+    self.hvc=hvc;
+    self.window = window;
+}
+
 - (IBAction)onLogin:(id)sender {
     [[TwitterClient sharedInstance] loginWithCompletion:^(User *currentUser, NSError *error) {
         if(currentUser != nil){
             NSLog(@"%@", currentUser.name);
-            [self openTweetsViewController];
+            [self openHamburgerViewController];
         }
         else {
             // print error
         }
     }];
+}
+
+-(void) openHamburgerViewController{
+    self.window.rootViewController = self.hvc;
+    MenuViewController *menuViewController = [[MenuViewController alloc] init];
+    //    menuViewController.hamburgerController = hamburgerViewController;
+    [self.hvc setMenuViewController:menuViewController];
 }
 
 - (void) openTweetsViewController{

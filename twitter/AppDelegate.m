@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "SignInViewController.h"
+#import "LoginViewController.h"
+#import "HamburgerViewController.h"
+#import "MenuViewController.h"
 #import "TwitterClient.h"
 #import "User.h"
 #import "tweet.h"
@@ -22,13 +24,27 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(onLogout) name:UserDidLogOutNotification object:nil];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    HamburgerViewController *hamburgerViewController = [[HamburgerViewController alloc] init];
+    
+    
+    LoginViewController *lvc = [[LoginViewController alloc] init];
+    [lvc setHamburger:hamburgerViewController:self.window];
+    self.window.rootViewController = lvc;
+//    MenuViewController *menuViewController = [[MenuViewController alloc] init];
+//    menuViewController.hamburgerController = hamburgerViewController;
+//    [hamburgerViewController setMenuViewController:menuViewController];
+
     return YES;
 }
 
 -(void) onLogout{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SignInViewController *rootViewController = [storyboard instantiateInitialViewController];
-    [[UIApplication sharedApplication].keyWindow setRootViewController:rootViewController];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    LoginViewController *rootViewController = [storyboard instantiateInitialViewController];
+//    [[UIApplication sharedApplication].keyWindow setRootViewController:rootViewController];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -9,7 +9,7 @@
 #import "TweetsViewController.h"
 #import "TweetDetailsViewController.h"
 #import "ComposeTweetViewController.h"
-#import "SignInViewController.h"
+#import "LoginViewController.h"
 #import "TweetTableViewCell.h"
 #import "TwitterClient.h"
 #import "tweet.h"
@@ -72,7 +72,7 @@
     [[TwitterClient sharedInstance] setCurrentUser:nil];
     [[TwitterClient sharedInstance].requestSerializer removeAccessToken];
     [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogOutNotification object:nil];
-//    SignInViewController *tvc = [[SignInViewController alloc] init];
+//    LoginViewController *tvc = [[LoginViewController alloc] init];
 //    [self presentViewController:tvc animated:NO completion:nil];
 }
 

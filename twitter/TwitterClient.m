@@ -17,6 +17,7 @@ NSString * const UserDidLogOutNotification = @"UserDidLogOutNotification";
 @interface TwitterClient ()
 @property (nonatomic, strong) void(^ loginCompletion)(User* user, NSError* error);
 @property (nonatomic, strong) void(^ tweetsCompletion)(NSArray* tweets, NSError* error);
+@property (nonatomic, strong) void(^ mentionsCompletion)(NSArray* tweets, NSError* error);
 @property (nonatomic, strong) void(^ createTweetCompletion)(tweet* tweetObj, NSError* error);
 @property (nonatomic, strong) void(^ reTweetCompletion)(tweet* tweetObj, NSError* error);
 @property (nonatomic, strong) void(^ favouriteCompletion)(tweet* tweetObj, NSError* error);
@@ -58,6 +59,21 @@ NSString * const UserDidLogOutNotification = @"UserDidLogOutNotification";
                 NSLog(@"%@", error);
                 self.tweetsCompletion(nil, error);
             }];
+}
+- (void) mentionsWithCompletion:(void(^)(NSArray* tweets, NSError* error)) completion{
+    self.mentionsCompletion = completion;
+    NSMutableDictionary* params = [NSMutableDictionary new];
+    [params setObject:_currentUser.screenName forKey:@"screen_name"];
+    
+    [self GET:@"1.1/statuses/user_timeline.json" parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        //            NSLog(@"Tweets are: %@", responseObject);
+        NSArray* tweets = [tweet tweetsWithArray:responseObject];
+        self.mentionsCompletion(tweets, nil);
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+        self.mentionsCompletion(nil, error);
+    }];
 }
 
 - (void) openUrl:(NSURL*) url{
@@ -138,5 +154,28 @@ NSString * const UserDidLogOutNotification = @"UserDidLogOutNotification";
         }
     }
     return _currentUser;
+}
+
+- (void) setCurrentViewingUser:(User *)CurrentViewingUser{
+    if(CurrentViewingUser != nil) {
+        NSData* data =  [NSJSONSerialization dataWithJSONObject:CurrentViewingUser.dictionary options:0 error:NULL];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"CurrentViewingUser"];
+        
+    }else{
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"CurrentViewingUser"];
+    }
+    _CurrentViewingUser = CurrentViewingUser;
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (User*) getCurrentViewingUser {
+    if(_CurrentViewingUser == nil){
+        NSData* data =  [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentViewingUser"];
+        if(data != nil){
+            NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+            _CurrentViewingUser = [[User alloc] initWithDictionary:dictionary];
+        }
+    }
+    return _CurrentViewingUser;
 }
 @end

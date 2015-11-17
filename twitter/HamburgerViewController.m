@@ -27,8 +27,10 @@
 
 - (void) setMenuViewController:(MenuViewController*) mvc{
     [self.view layoutIfNeeded];
-    [self.MenuView addSubview:[[MenuViewController alloc]init].view];
-    [self.view layoutIfNeeded];
+    mvc.view.frame = self.MenuView.bounds;
+    [self.MenuView addSubview:mvc.view];
+    [self addChildViewController:mvc];
+    [mvc didMoveToParentViewController:self];
 }
 - (IBAction)onPanGestureEvent:(UIPanGestureRecognizer *)sender {
     CGPoint translation = [sender translationInView:self.view];
@@ -40,13 +42,24 @@
     }else if(sender.state == UIGestureRecognizerStateEnded){
         [UIView animateWithDuration:0.3 animations:^{
             if(velocity.x > 0){
-                self.ContentViewLeftMargin.constant = self.OriginalContentViewStartingLoc + self.view.frame.size.width - 50;
+                self.ContentViewLeftMargin.constant = self.OriginalContentViewStartingLoc + self.view.frame.size.width - 100;
             }else {
                 self.ContentViewLeftMargin.constant  = 0;
             }
             [self.view layoutIfNeeded];
         }];
     }
+    NSLog(@"I got first");
+}
+
+-(void) changeContentView:(UIViewController*) uvc{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.ContentViewLeftMargin.constant  = 0;
+    }];
+
+    uvc.view.frame = self.ContentView.bounds;
+    [self.ContentView addSubview:uvc.view];
+    [self addChildViewController:uvc];
 }
 
 - (void)didReceiveMemoryWarning {

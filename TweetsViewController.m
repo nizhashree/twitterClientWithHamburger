@@ -18,6 +18,7 @@
 @interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *TweetsTableView;
 @property NSMutableArray* tweets;
+@property NSString* tweetType;
 
 @end
 
@@ -31,23 +32,48 @@
     self.TweetsTableView.estimatedRowHeight = 86;
     self.TweetsTableView.rowHeight = UITableViewAutomaticDimension;
     self.TweetsTableView.hidden = YES;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[TwitterClient sharedInstance] tweetsWithCompletion:^(NSArray *tweets, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if(error == nil) {
-            self.TweetsTableView.hidden = NO;
-            for(tweet* singleTweet in tweets){
-                NSLog(@"%@ -- %@", singleTweet.createdAt, singleTweet.text);
-            }
-            self.tweets = tweets;
-            [self.TweetsTableView reloadData];
-        }
-        else{
-            //handle error case
-        }
-    }];
     [self.TweetsTableView registerNib:[UINib nibWithNibName:@"TweetTableViewCell" bundle:nil] forCellReuseIdentifier:@"TweetTableViewCell"];
     [self setNavigationBar];
+}
+
+- (void) changeTweetType:(NSString*) tweetType{
+    self.tweetType = tweetType;
+    if([tweetType  isEqual: @"mentions"]){
+       self.title = @"Mentions";
+       [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+       [[TwitterClient sharedInstance] mentionsWithCompletion:^(NSArray *tweets, NSError *error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if(error == nil) {
+                self.TweetsTableView.hidden = NO;
+                for(tweet* singleTweet in tweets){
+                    NSLog(@"%@ -- %@", singleTweet.createdAt, singleTweet.text);
+                }
+                self.tweets = tweets;
+                [self.TweetsTableView reloadData];
+            }
+            else{
+                //handle error case
+            }
+        }];
+    }else{
+        self.title = @"Tweets";
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[TwitterClient sharedInstance] tweetsWithCompletion:^(NSArray *tweets, NSError *error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if(error == nil) {
+                self.TweetsTableView.hidden = NO;
+                for(tweet* singleTweet in tweets){
+                    NSLog(@"%@ -- %@", singleTweet.createdAt, singleTweet.text);
+                }
+                self.tweets = tweets;
+                [self.TweetsTableView reloadData];
+            }
+            else{
+                //handle error case
+            }
+        }];
+    }
+    
 }
 
 -(void) setNavigationBar {

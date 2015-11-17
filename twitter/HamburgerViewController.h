@@ -12,4 +12,5 @@
 
 @interface HamburgerViewController : UIViewController
 - (void) setMenuViewController:(MenuViewController*) mvc;
+- (void) changeContentView:(UIViewController*) uvc;
 @end

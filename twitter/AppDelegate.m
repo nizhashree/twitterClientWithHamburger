@@ -34,9 +34,6 @@
     LoginViewController *lvc = [[LoginViewController alloc] init];
     [lvc setHamburger:hamburgerViewController:self.window];
     self.window.rootViewController = lvc;
-//    MenuViewController *menuViewController = [[MenuViewController alloc] init];
-//    menuViewController.hamburgerController = hamburgerViewController;
-//    [hamburgerViewController setMenuViewController:menuViewController];
 
     return YES;
 }

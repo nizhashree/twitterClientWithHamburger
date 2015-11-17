@@ -15,8 +15,10 @@ extern NSString * const UserDidLogOutNotification;
 + (TwitterClient*)sharedInstance;
 
 @property (nonatomic, strong) User* currentUser;
+@property (nonatomic, strong) User* CurrentViewingUser;
 - (void) loginWithCompletion:(void(^)(User* user, NSError* error)) completion;
 - (void) tweetsWithCompletion:(void(^)(NSArray* tweets, NSError* error)) completion;
+- (void) mentionsWithCompletion:(void(^)(NSArray* tweets, NSError* error)) completion;
 - (void) createTweetWithCompletion:(NSDictionary*) params:(void(^)(tweet* tweetObj, NSError* error)) completion;
 - (void) reTweetWithCompletion:(long long) tweetID:(void(^)(tweet* tweetObj, NSError* error)) completion;
 - (void) favouriteWithCompletion:(long long) tweetID:(void(^)(tweet* tweetObj, NSError* error)) completion;

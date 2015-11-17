@@ -59,7 +59,7 @@
 -(void) openHamburgerViewController{
     self.window.rootViewController = self.hvc;
     MenuViewController *menuViewController = [[MenuViewController alloc] init];
-    //    menuViewController.hamburgerController = hamburgerViewController;
+    [menuViewController setHamburger:self.hvc];
     [self.hvc setMenuViewController:menuViewController];
 }
 

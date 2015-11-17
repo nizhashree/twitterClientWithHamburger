@@ -1,5 +1,5 @@
 //
-//  MenuViewController.h
+//  ProfileViewController.h
 //  twitter
 //
 //  Created by Nizha Shree Seenivasan on 11/16/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MenuViewController : UIViewController
-- (void) setHamburger:(UIViewController *)hamburgerController;
+@interface ProfileViewController : UIViewController
+
 @end

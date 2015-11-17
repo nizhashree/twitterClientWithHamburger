@@ -19,11 +19,11 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EdV-Cq-qW0" userLabel="MenuView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nW7-Sq-1SA" userLabel="ContentView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="aY6-Vn-tFw" appends="YES" id="y7j-be-vrT"/>
@@ -43,7 +43,7 @@
             </constraints>
             <point key="canvasLocation" x="240" y="295"/>
         </view>
-        <panGestureRecognizer minimumNumberOfTouches="1" id="aY6-Vn-tFw">
+        <panGestureRecognizer cancelsTouchesInView="NO" minimumNumberOfTouches="1" id="aY6-Vn-tFw">
             <connections>
                 <action selector="onPanGestureEvent:" destination="-1" id="Hw2-ZR-cnR"/>
             </connections>

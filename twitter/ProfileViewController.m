@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "TwitterClient.h"
+#import "ComposeTweetViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "User.h"
 #import "ProfileStatsTableViewCell.h"
@@ -39,6 +40,27 @@
     return unc;
 }
 
+-(void) setNavigationBar {
+
+    
+    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button2.frame = CGRectMake(10, 0, 70, 30);
+    [button2 setTitle:@"Sign Out" forState:UIControlStateNormal];
+    [button2 addTarget:self action:@selector(onSignOut) forControlEvents:UIControlEventTouchUpInside];
+    button2.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button2];
+}
+
+-(void) onSignOut{
+    [[TwitterClient sharedInstance] setCurrentUser:nil];
+    [[TwitterClient sharedInstance].requestSerializer removeAccessToken];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogOutNotification object:nil];
+    //    LoginViewController *tvc = [[LoginViewController alloc] init];
+    //    [self presentViewController:tvc animated:NO completion:nil];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.StatsTable.dataSource = self;
@@ -51,6 +73,7 @@
     _HeaderView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:currentUser.profileBackgroundImageUrl]]]];
     [self.StatsTable registerNib:[UINib nibWithNibName:@"ProfileStatsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ProfileStatsTableViewCell"];
     self.StatsTable.rowHeight = UITableViewAutomaticDimension;
+    [self setNavigationBar];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -40,8 +40,8 @@
 
 -(void) onLogout{
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    LoginViewController *rootViewController = [storyboard instantiateInitialViewController];
-//    [[UIApplication sharedApplication].keyWindow setRootViewController:rootViewController];
+    LoginViewController *rootViewController = [[LoginViewController alloc]init];
+    [[UIApplication sharedApplication].keyWindow setRootViewController:rootViewController];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

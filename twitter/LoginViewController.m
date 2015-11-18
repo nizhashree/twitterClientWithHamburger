@@ -48,10 +48,12 @@
     [[TwitterClient sharedInstance] loginWithCompletion:^(User *currentUser, NSError *error) {
         if(currentUser != nil){
             NSLog(@"%@", currentUser.name);
+            self.signInButton.hidden = YES;
+            self.successLogin.hidden = NO;
             [self openHamburgerViewController];
         }
         else {
-            // print error
+            NSLog(@"%@", error);
         }
     }];
 }

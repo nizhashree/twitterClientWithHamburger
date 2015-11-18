@@ -9,6 +9,7 @@
 #import "TweetsViewController.h"
 #import "TweetDetailsViewController.h"
 #import "ComposeTweetViewController.h"
+#import "ProfileViewController.h"
 #import "LoginViewController.h"
 #import "TweetTableViewCell.h"
 #import "TwitterClient.h"
@@ -19,11 +20,14 @@
 @property (weak, nonatomic) IBOutlet UITableView *TweetsTableView;
 @property NSMutableArray* tweets;
 @property NSString* tweetType;
+@property HamburgerViewController* hamburgerViewController;
 
 @end
 
 @implementation TweetsViewController
-
+-(void) setHamburger:(HamburgerViewController*) hamburgerViewController{
+    self.hamburgerViewController = hamburgerViewController;
+}
 - (void)viewDidLoad {
     self.title = @"Home";
     [super viewDidLoad];
@@ -137,7 +141,15 @@
     return cell;
 }
 
+-(void) tweetTableViewCell:(TweetTableViewCell *) tweetTableViewCell profileImageClicked:(BOOL) value{
+    if(value){
+        ProfileViewController* pvc = [[ProfileViewController alloc] init];
+        [self presentViewController:pvc animated:YES completion:nil];
+    }
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"I got second");
     [self.TweetsTableView deselectRowAtIndexPath:indexPath animated:YES];
     TweetTableViewCell *selectedCell=[tableView cellForRowAtIndexPath:indexPath];
     TweetDetailsViewController *vc = [[TweetDetailsViewController alloc] init];

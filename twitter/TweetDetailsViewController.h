@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "tweet.h"
+#import "HamburgerViewController.h"
 
 @interface TweetDetailsViewController : UIViewController
 @property (nonatomic, strong) tweet* singleTweet;
+-(void) setHamburger:(HamburgerViewController*) hamburgerViewController;
 -(void) setJson:(tweet*)tweet;
 @end

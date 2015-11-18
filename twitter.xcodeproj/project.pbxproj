@@ -23,6 +23,8 @@
 		FE5D458F1BFAD4E400231529 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE5D458E1BFAD4E400231529 /* MenuTableViewCell.xib */; };
 		FE5D45991BFAD8FE00231529 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5D45971BFAD8FE00231529 /* ProfileViewController.m */; };
 		FE5D459A1BFAD8FE00231529 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE5D45981BFAD8FE00231529 /* ProfileViewController.xib */; };
+		FE5D459F1BFC45E000231529 /* ProfileStatsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5D459D1BFC45E000231529 /* ProfileStatsTableViewCell.m */; };
+		FE5D45A01BFC45E000231529 /* ProfileStatsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE5D459E1BFC45E000231529 /* ProfileStatsTableViewCell.xib */; };
 		FE9A811A1BF187650046F699 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9A81191BF187650046F699 /* User.m */; };
 		FE9A811D1BF18A340046F699 /* tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9A811C1BF18A340046F699 /* tweet.m */; };
 		FE9A81211BF196660046F699 /* TweetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9A811F1BF196660046F699 /* TweetsViewController.m */; };
@@ -63,6 +65,9 @@
 		FE5D45961BFAD8FE00231529 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		FE5D45971BFAD8FE00231529 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		FE5D45981BFAD8FE00231529 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		FE5D459C1BFC45E000231529 /* ProfileStatsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileStatsTableViewCell.h; sourceTree = "<group>"; };
+		FE5D459D1BFC45E000231529 /* ProfileStatsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileStatsTableViewCell.m; sourceTree = "<group>"; };
+		FE5D459E1BFC45E000231529 /* ProfileStatsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileStatsTableViewCell.xib; sourceTree = "<group>"; };
 		FE9A81181BF187650046F699 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		FE9A81191BF187650046F699 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		FE9A811B1BF18A340046F699 /* tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tweet.h; sourceTree = "<group>"; };
@@ -199,6 +204,7 @@
 		FE5D45861BFAD4AD00231529 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				FE5D459B1BFC45C200231529 /* profileStats */,
 				FE5D45941BFAD53700231529 /* tweet */,
 				FE5D45871BFAD4B400231529 /* menu */,
 			);
@@ -273,6 +279,16 @@
 				FE5D45981BFAD8FE00231529 /* ProfileViewController.xib */,
 			);
 			name = profile;
+			sourceTree = "<group>";
+		};
+		FE5D459B1BFC45C200231529 /* profileStats */ = {
+			isa = PBXGroup;
+			children = (
+				FE5D459C1BFC45E000231529 /* ProfileStatsTableViewCell.h */,
+				FE5D459D1BFC45E000231529 /* ProfileStatsTableViewCell.m */,
+				FE5D459E1BFC45E000231529 /* ProfileStatsTableViewCell.xib */,
+			);
+			name = profileStats;
 			sourceTree = "<group>";
 		};
 		FE9A81171BF186F00046F699 /* models */ = {
@@ -356,6 +372,7 @@
 				FE233B561BEB11A0008278E0 /* Assets.xcassets in Resources */,
 				FE9A81341BF3060A0046F699 /* ComposeTweetViewController.xib in Resources */,
 				FE9A812F1BF1D8510046F699 /* TweetDetailsViewController.xib in Resources */,
+				FE5D45A01BFC45E000231529 /* ProfileStatsTableViewCell.xib in Resources */,
 				FE5D458F1BFAD4E400231529 /* MenuTableViewCell.xib in Resources */,
 				FE5D45851BFAB8D800231529 /* LoginViewController.xib in Resources */,
 			);
@@ -430,6 +447,7 @@
 				FE9A81211BF196660046F699 /* TweetsViewController.m in Sources */,
 				FE5D458D1BFAD4DE00231529 /* MenuTableViewCell.m in Sources */,
 				FE2ACCDE1BFA4BB0002D34FD /* HamburgerViewController.m in Sources */,
+				FE5D459F1BFC45E000231529 /* ProfileStatsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

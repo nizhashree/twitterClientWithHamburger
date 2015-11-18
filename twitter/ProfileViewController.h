@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HamburgerViewController.h"
 @interface ProfileViewController : UIViewController
-
+-(void) setHamburger:(HamburgerViewController*) hamburgerViewController;
 @end

@@ -59,8 +59,12 @@
     UINavigationController* nc2 =[self setTweetsController];
     TweetsViewController* tvc = [nc1 viewControllers][0];
     TweetsViewController* mvc = [nc2 viewControllers][0];
+    [tvc setHamburger:self.hamburgerController];
+    [mvc setHamburger:self.hamburgerController];
+
     [tvc changeTweetType:@"tweets"];
     [mvc changeTweetType:@"mentions"];
+    [pvc setHamburger:self.hamburgerController];
     self.controllers = @[pvc, nc1, nc2];
 }
 

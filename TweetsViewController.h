@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HamburgerViewController.h"
 
 @interface TweetsViewController : UIViewController
 - (void) changeTweetType:(NSString*) tweetType;
+-(void) setHamburger:(HamburgerViewController*) hamburgerViewController;
 @end

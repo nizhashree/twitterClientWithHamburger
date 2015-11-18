@@ -9,6 +9,7 @@
 #import "TweetDetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeTweetViewController.h"
+#import "ProfileViewController.h"
 #import "TwitterClient.h"
 @interface TweetDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *retweetedText;
@@ -23,10 +24,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *ReplyButton;
 @property (weak, nonatomic) IBOutlet UIButton *RetweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *FavButton;
+@property HamburgerViewController* hamburgerViewController;
 
 @end
 
 @implementation TweetDetailsViewController
+-(void) setHamburger:(HamburgerViewController*) hamburgerViewController{
+    self.hamburgerViewController = hamburgerViewController;
+}
 - (IBAction)onReply:(id)sender {
     _ReplyButton.userInteractionEnabled = NO;
     ComposeTweetViewController *vc = [[ComposeTweetViewController alloc] init];
@@ -57,6 +62,10 @@
         }
 
     } ];
+}
+- (IBAction)onProfilePicTapped:(UITapGestureRecognizer *)sender {
+    ProfileViewController* pvc = [[ProfileViewController alloc] init];
+    [self presentViewController:pvc animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {

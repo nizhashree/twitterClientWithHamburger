@@ -17,6 +17,11 @@
         self.screenName = dictionary[@"screen_name"];
         self.profileImageURL = dictionary[@"profile_image_url"];
         self.tagline = dictionary[@"description"];
+        self.followers_count =[NSString stringWithFormat:@"%ld", [dictionary[@"followers_count"] longValue]];
+        self.following_count = [NSString stringWithFormat:@"%ld", [dictionary[@"friends_count"] longValue]];
+        self.profileBackgroundImageUrl = dictionary[@"profile_background_image_url"];
+        self.tweets_count = [NSString stringWithFormat:@"%ld", [dictionary[@"statuses_count"] longValue]];
+        self.UserID = dictionary[@"id"];
     }
     return self;
 }

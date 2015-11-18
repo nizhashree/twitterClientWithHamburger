@@ -10,4 +10,5 @@
 #import "HamburgerViewController.h"
 @interface ProfileViewController : UIViewController
 -(void) setHamburger:(HamburgerViewController*) hamburgerViewController;
++ (UINavigationController*) getNavigatedProfileViewController;
 @end

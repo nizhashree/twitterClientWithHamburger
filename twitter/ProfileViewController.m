@@ -27,11 +27,24 @@
     self.hamburgerViewController = hamburgerViewController;
 }
 
++ (UINavigationController*) getNavigatedProfileViewController{
+    ProfileViewController *tvc = [[ProfileViewController alloc] init];
+    [tvc setTitle:@"Profile Page"];
+    tvc.edgesForExtendedLayout = UIRectEdgeNone;
+    UINavigationController *unc = [[UINavigationController alloc] initWithRootViewController:tvc];
+    [unc.navigationBar setBarTintColor:[UIColor colorWithRed:0.33 green:0.67 blue:0.93 alpha:1.0]];
+    unc.navigationBar.tintColor = [UIColor whiteColor];
+    unc.navigationBar.translucent = YES;
+    [unc.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    return unc;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.StatsTable.dataSource = self;
     self.StatsTable.delegate = self;
-    User* currentUser = [[TwitterClient sharedInstance] getCurrentUser];
+    User* currentUser = [[TwitterClient sharedInstance] getCurrentViewingUser];
+    [self setTitle:currentUser.name];
     [_profilePic setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL]];
     _UserName.text = currentUser.name;
     _ScreenName.text = [NSString stringWithFormat:@"@%@",  currentUser.screenName];

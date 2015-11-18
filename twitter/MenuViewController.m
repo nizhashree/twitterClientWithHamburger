@@ -54,7 +54,8 @@
     self.hamburgerController = hamburgerController;
 }
 - (void) initializeControllers{
-    ProfileViewController* pvc = [[ProfileViewController alloc] init];
+    UINavigationController* pvc = [ProfileViewController getNavigatedProfileViewController];
+    ProfileViewController* pv = [pvc viewControllers][0];
     UINavigationController* nc1 =[self setTweetsController];
     UINavigationController* nc2 =[self setTweetsController];
     TweetsViewController* tvc = [nc1 viewControllers][0];
@@ -64,7 +65,7 @@
 
     [tvc changeTweetType:@"tweets"];
     [mvc changeTweetType:@"mentions"];
-    [pvc setHamburger:self.hamburgerController];
+    [pv setHamburger:self.hamburgerController];
     self.controllers = @[pvc, nc1, nc2];
 }
 
@@ -109,6 +110,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [[TwitterClient sharedInstance] setCurrentViewingUser:[[TwitterClient sharedInstance] getCurrentUser]];
     [self.hamburgerController  changeContentView:self.controllers[indexPath.row]];
 }
 

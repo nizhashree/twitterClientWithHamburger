@@ -16,7 +16,7 @@
 #import "tweet.h"
 #import "MBProgressHUD.h"
 
-@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate>
+@interface TweetsViewController ()<UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate, TweetTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *TweetsTableView;
 @property NSMutableArray* tweets;
 @property NSString* tweetType;
@@ -137,15 +137,26 @@
 
 - (TweetTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TweetTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"TweetTableViewCell"];
+    cell.delegate = self;
+    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(onProfilePicTapped:)];
+    [tapped setCancelsTouchesInView:YES];
+    tapped.numberOfTapsRequired = 1;
+    [cell.UserProfileImage addGestureRecognizer:tapped];
+
     [cell setTweet:self.tweets[indexPath.row]];
     return cell;
 }
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return YES;
+}
+
 -(void) tweetTableViewCell:(TweetTableViewCell *) tweetTableViewCell profileImageClicked:(BOOL) value{
-    if(value){
-        ProfileViewController* pvc = [[ProfileViewController alloc] init];
-        [self presentViewController:pvc animated:YES completion:nil];
-    }
+    NSLog(@"I got tapped");
+    [[TwitterClient sharedInstance] setCurrentViewingUser:tweetTableViewCell.singleTweet.user];
+    UINavigationController* pvc = [ProfileViewController getNavigatedProfileViewController];
+    [self.hamburgerViewController changeContentView:pvc];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -153,6 +164,7 @@
     [self.TweetsTableView deselectRowAtIndexPath:indexPath animated:YES];
     TweetTableViewCell *selectedCell=[tableView cellForRowAtIndexPath:indexPath];
     TweetDetailsViewController *vc = [[TweetDetailsViewController alloc] init];
+    [vc setHamburger:self.hamburgerViewController];
     vc.edgesForExtendedLayout = UIRectEdgeNone;
     [vc setJson:selectedCell.singleTweet];
     [self.navigationController pushViewController:vc animated:YES];

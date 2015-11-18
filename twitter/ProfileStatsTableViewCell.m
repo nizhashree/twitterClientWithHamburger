@@ -11,7 +11,11 @@
 @implementation ProfileStatsTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    [self.contentView.layer setBorderColor:[UIColor colorWithRed:0.66 green:0.59 blue:0.59 alpha:1.0].CGColor];
+    [self.contentView.layer setBorderWidth:2.0f];
+//    self.contentView.layer.cornerRadius = 3;
+    self.contentView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

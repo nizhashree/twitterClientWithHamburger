@@ -24,4 +24,5 @@ extern NSString * const UserDidLogOutNotification;
 - (void) favouriteWithCompletion:(long long) tweetID:(void(^)(tweet* tweetObj, NSError* error)) completion;
 - (void) openUrl:(NSURL*) url;
 - (User*) getCurrentUser;
+- (User*) getCurrentViewingUser;
 @end

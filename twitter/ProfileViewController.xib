@@ -42,7 +42,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="V4p-aC-VFV" firstAttribute="leading" secondItem="ICg-ae-LuK" secondAttribute="leading" constant="73" id="4Fn-oR-Qok"/>
                         <constraint firstItem="ZwF-eu-FhE" firstAttribute="leading" secondItem="ICg-ae-LuK" secondAttribute="leading" constant="73" id="B4H-Ur-HIl"/>
@@ -52,22 +52,22 @@
                         <constraint firstItem="B7k-SG-ap9" firstAttribute="top" secondItem="ZwF-eu-FhE" secondAttribute="bottom" constant="8" id="yWf-Z2-TP0"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uaq-mQ-bRh">
-                    <rect key="frame" x="0.0" y="236" width="320" height="64"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uaq-mQ-bRh">
+                    <rect key="frame" x="0.0" y="228" width="320" height="64"/>
+                    <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="64" id="gc9-uB-gjd"/>
                     </constraints>
                     <color key="separatorColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="ICg-ae-LuK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6nl-Ea-TIQ"/>
                 <constraint firstAttribute="trailing" secondItem="Uaq-mQ-bRh" secondAttribute="trailing" id="G2L-C9-c0p"/>
-                <constraint firstItem="Uaq-mQ-bRh" firstAttribute="top" secondItem="ICg-ae-LuK" secondAttribute="bottom" constant="8" id="IRh-TJ-9WY"/>
+                <constraint firstItem="Uaq-mQ-bRh" firstAttribute="top" secondItem="ICg-ae-LuK" secondAttribute="bottom" id="IRh-TJ-9WY"/>
                 <constraint firstItem="Uaq-mQ-bRh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Iag-HE-f4H"/>
-                <constraint firstAttribute="bottom" secondItem="Uaq-mQ-bRh" secondAttribute="bottom" constant="268" id="eDH-f2-9lk"/>
+                <constraint firstAttribute="bottom" secondItem="Uaq-mQ-bRh" secondAttribute="bottom" constant="276" id="eDH-f2-9lk"/>
                 <constraint firstItem="ICg-ae-LuK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="u1x-rS-aKI"/>
                 <constraint firstAttribute="trailing" secondItem="ICg-ae-LuK" secondAttribute="trailing" id="yMn-i2-mUx"/>
             </constraints>

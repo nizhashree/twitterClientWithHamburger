@@ -13,7 +13,11 @@
 
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
+-(void) onProfilePicTapped:(id) sender{
+    [self.delegate tweetTableViewCell:self profileImageClicked:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

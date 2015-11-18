@@ -64,8 +64,10 @@
     } ];
 }
 - (IBAction)onProfilePicTapped:(UITapGestureRecognizer *)sender {
-    ProfileViewController* pvc = [[ProfileViewController alloc] init];
-    [self presentViewController:pvc animated:YES completion:nil];
+    UINavigationController* pvc = [ProfileViewController getNavigatedProfileViewController];
+    [[TwitterClient sharedInstance] setCurrentViewingUser:self.singleTweet.user];
+    [self.hamburgerViewController changeContentView:pvc];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {

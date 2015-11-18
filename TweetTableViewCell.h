@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "tweet.h"
 
-//@class TweetTableViewCell;
-//@protocol TweetTableViewCellDelegate <NSObject>
-//-(void) tweetTableViewCell:(TweetTableViewCell *) tweetTableViewCell profileImageClicked:(BOOL) value;
-//@end
+@class TweetTableViewCell;
+@protocol TweetTableViewCellDelegate <NSObject>
+-(void) tweetTableViewCell:(TweetTableViewCell *) tweetTableViewCell profileImageClicked:(BOOL) value;
+@end
 
 @interface TweetTableViewCell : UITableViewCell
-//@property (nonatomic, weak) id<TweetTableViewCellDelegate> delegate;
+-(void) onProfilePicTapped:(id) sender;
+@property (nonatomic, weak) id<TweetTableViewCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *tweetDescription;
 @property (weak, nonatomic) IBOutlet UILabel *CreatedDate;
 @property (weak, nonatomic) IBOutlet UIImageView *UserProfileImage;
